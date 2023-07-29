@@ -10011,3 +10011,23 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+/* .left {
+  padding: 0%;
+  margin : 20% 27% 0% 0%;
+  .txt {
+    color: #DB8017;
+text-align: center;
+font-family: Helvetica;
+font-size: 25px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+  }
+}
+/* .right {
+  position: absolute;
+  margin : 0% 5%;
+  top: 7.5%;
+  left: 42%;
+  right: 5%;
+} */ 
