@@ -337,9 +337,244 @@
 		$("#seconds").html(seconds + "<span>Seconds</span>");		
 
 }
-
 setInterval(function() { makeTimer(); }, 1000);
 
+
+//ICI GESTION DES PRODUITS
+
+//Local storage
+//nom du clé pour projet vakna-datas
+var vkey = 'vakna-datas'
+
+function ll(){
+	var vdatas = localStorage.getItem(vkey)
+
+	function setInitDatas(){
+		let v = {
+			products:[
+				{id:1,name:"Raisin",status:"30%",price_dc:"4420 Ariary / kg",price_sale:"3 400 Ariary / kg",im:"images/product-1.jpg"},
+				{id:2,name:"Fraise",status:null,price_dc:null,price_sale:"2 800 Ariary/kg",im:"images/product-2.jpg"},
+				{id:3,name:"Patates douces",status:null,price_dc:null,price_sale:"2 000 Ariary/kg",im:"images/product-3.jpg"},
+				{id:4,name:"Betterave",status:null,price_dc:null,price_sale:"3 000 Ariary / kg",im:"images/product-4.jpg"},
+				{id:5,name:"Banane",status:"30%",price_dc:"2 990 Ariary / kg",price_sale:"2 300 Ariary / kg",im:"images/product-5.jpg"},
+				{id:6,name:"Orange",status:null,price_dc:null,price_sale:"4 000 Ariary / kg",im:"images/product-6.jpg"},
+				{id:7,name:"Citrons",status:null,price_dc:null,price_sale:"2 900 Ariary / kg",im:"images/product-7.jpg"},
+				{id:8,name:"Poivrons jaunes",status:null,price_dc:null,price_sale:"5 000 Ariary / kg",im:"images/product-8.jpg"},
+				{id:9,name:"Oignons",status:null,price_dc:null,price_sale:"3 400 Ariary / kg",im:"images/product-9.jpg",good:1},
+				{id:10,name:"Pomme",status:null,price_dc:null,price_sale:"3 500 Ariary / kg",im:"images/product-10.jpg"},
+				{id:11,name:"Carottes",status:null,price_dc:null,price_sale:"2 700 Ariary / kg",im:"images/product-11.jpg"},
+				{id:12,name:"Radis",status:null,price_dc:null,price_sale:"4 000 Ariary / kg",im:"images/product-12.jpg"},
+
+				{id:13,name:"Mandarine",status:null,price_dc:null,price_sale:"3 400 Ariary / kg",im:"images/good-1.jpg",good:1},
+				{id:14,name:"Choux rouges",status:null,price_dc:null,price_sale:"3 400 Ariary / kg",im:"images/good-2.jpg",good:1},
+				{id:15,name:"Pastèques",status:null,price_dc:null,price_sale:"3 400 Ariary / kg",im:"images/good-3.jpg",good:1},
+				{id:16,name:"Tamarin",status:null,price_dc:null,price_sale:"3 400 Ariary / kg",im:"images/good-4.jpg",good:1},
+			],
+			category:[
+				{label:'Tous',id:-1},
+				{label:'Nos Fruits',id:1},
+				{label:'Nos Légumes',id:2},
+				{label:'Autres',id:2},
+			],
+
+			card:{}, //clé : id du produit, value : nombre de commande
+			wish:[],
+		}
+		localStorage.setItem(vkey,JSON.stringify(v))
+	}
+
+	//si null, c'est qu'aucun donné n'a été enregistré
+	if(!vdatas){
+		//on le met au format json
+		setInitDatas()
+	}else{
+		vdatas = JSON.parse(vdatas)
+		if(vdatas.products.length <= 1){
+			setInitDatas()
+			vdatas = JSON.parse(localStorage.getItem(vkey))
+		}
+
+		// console.log(vdatas)
+	}
+
+	function saveDatas(){
+		localStorage.setItem(vkey,JSON.stringify(vdatas))
+	}
+
+	//affichage des produits
+	var pr = ''
+	var count = 0
+	for (let i = 0; i < vdatas.products.length; i++) {
+		const e = vdatas.products[i];
+
+		pr = `<div class="col-md-6 col-lg-3">
+		<div class="product">
+				<a href="#" class="img-prod"><img class="img-fluid" src="${e.im}" alt="${e.name}">
+					${e.status?`<span class="status">${e.status}</span>`:''}
+					<div class="overlay"></div>
+				</a>
+				<div class="text py-3 pb-4 px-3 text-center">
+					<h3><a href="#"> ${e.name} </a></h3>
+					<div class="d-flex">
+						<div class="pricing">
+							<p class="price"> ${e.status?`<span class="mr-2 price-dc">${e.price_dc}</span>`:''} <span class="price-sale"> ${e.price_sale} </span></p>
+						</div>
+					</div>
+					<div class="bottom-area d-flex px-3">
+						<div class="m-auto d-flex">
+							<a href="#" data-prodid="${e.id}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+								<span><i class="ion-ios-menu"></i></span>
+							</a>
+							<a href="#" data-prodid="${e.id}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+								<span><i class="ion-ios-cart"></i></span>
+							</a>
+							<a href="#" data-prodid="${e.id}" class="heart d-flex justify-content-center align-items-center ">
+								<span><i class="ion-ios-heart"></i></span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>`
+
+		if(count < 6) $('.list-prod-home').append($(pr))
+		count++
+
+		$('.list-all-products').append($(pr))
+
+		if(!e.good) continue
+
+		pr = `<div class="product" >
+		<a href="#" class="img-prod"><img class="img-fluid1" id="${e.name.toLowerCase()}" src="${e.im}" alt="Colorlib Template">
+			<div class="overlay"></div>
+		</a>
+		<div class="text py-3 pb-4 px-3 text-center">
+			<h3><a href="#"> ${e.name} </a></h3>
+			<div class="d-flex">
+				<div class="pricing">
+					<p class="price"> ${e.status?`<span class="mr-2 price-dc">${e.price_dc}</span>`:''} <span class="price-sale"> ${e.price_sale} </span></p>
+				</div>
+			</div>
+			<div class="bottom-area d-flex px-3">
+				<div class="m-auto d-flex">
+					<a href="#" data-prodid="${e.id}" class="add-to-cart d-flex justify-content-center align-items-center text-center">
+						<span><i class="ion-ios-menu"></i></span>
+					</a>
+					<a href="#" data-prodid="${e.id}" class="buy-now d-flex justify-content-center align-items-center mx-1">
+						<span><i class="ion-ios-cart"></i></span>
+					</a>
+					<a href="#" data-prodid="${e.id}" class="heart d-flex justify-content-center align-items-center ">
+						<span><i class="ion-ios-heart"></i></span>
+					</a>
+				</div>
+			</div>
+		</div>
+		</div>`
+
+		$('.list-all-good').append($(pr))
+
+	}
+
+	count = 0
+
+	//Affichage des produits dans le panier
+	function displayProdCart(){
+
+		let prod_ids = Object.keys(vdatas.card).map( x => parseInt(x))
+
+		let list_det_cart = []
+
+		for (let i = 0; i < vdatas.products.length; i++) {
+			const e = vdatas.products[i]
+			const prix = parseInt(e.price_sale.replace(/\s/g,''))
+
+			if(prod_ids.indexOf(e.id) != -1){
+				list_det_cart.push({
+					desc:'Délicieux',
+					name:e.name,
+					im:e.im,
+					price:`Ar ${prix}`,
+					quantity:vdatas.card[e.id],
+					total:`Ar ${prix * vdatas.card[e.id]}`
+				})
+			}else{
+				continue
+			}
+		}
+
+		console.log(list_det_cart)
+
+		//ajout du html du de la liste
+		for (let i = 0; i < list_det_cart.length; i++) {
+			const e = list_det_cart[i];
+			
+			const pr = `<tr class="text-center">
+				<td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+				
+				<td class="image-prod"><div class="img" style="background-image:url(${e.im});"></div></td>
+				
+				<td class="product-name">
+					<h3>${e.name}</h3>
+					<p> ${e.desc} </p>
+				</td>
+				
+				<td class="price"> ${e.price} </td>
+				
+				<td class="quantity">
+						<div class="input-group mb-3">
+						<input type="text" name="quantity" class="quantity form-control input-number" value="${e.quantity}" min="1" max="100">
+					</div>
+				</td>
+
+				<td class="total"> ${e.total} </td>
+			</tr>`
+
+
+			$('.list-cart').append($(pr))
+		}
+
+	}
+
+	displayProdCart()
+
+	//L
+	$('body').on('click','.add-to-cart',function(){
+		var idp = parseInt($(this).data('prodid'))
+		vdatas.card[idp] = (vdatas.card[idp])?vdatas.card[idp]+1:1
+
+		// console.log(vdatas.card);
+		updatePanNb()
+
+		//à chaque fois qu'on fait une modif dans le datas on sauvegarde
+		saveDatas()
+	})
+
+	//Mise à jour du nombre de produit dans le panier
+	function updatePanNb(){
+		var tt = Object.keys(vdatas.card)
+
+		var sum = 0
+
+		for (let i = 0; i < tt.length; i++) {
+			const e = tt[i];
+			sum += vdatas.card[e]
+		}
+		//la classe qui contient le nuléro des éléments dans le panier
+		$('.pan-content').text(`[${sum}]`)
+	}
+
+	//Clear cart //suppression de la contenu de la carte
+	$('.validate-command').on('click',function(){
+		vdatas.card = {}
+		saveDatas()
+	})
+
+	//On le lance au début
+	updatePanNb()
+}
+
+
+document.addEventListener('DOMContentLoaded',ll())
 
 
 })(jQuery);
