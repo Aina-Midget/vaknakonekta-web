@@ -10014,3 +10014,103 @@ textarea.form-control {
   100% {
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -136px; } }
+/* .left {
+  padding: 0%;
+  margin : 20% 27% 0% 0%;
+  .txt {
+    color: #DB8017;
+text-align: center;
+font-family: Helvetica;
+font-size: 25px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+  }
+}
+/* .right {
+  position: absolute;
+  margin : 0% 5%;
+  top: 7.5%;
+  left: 42%;
+  right: 5%;
+} */
+.custom-hero {
+
+  overflow: hidden;/* Couleur verte pour la moitié gauche */
+  color: white; /* Couleur du texte en haut de la moitié verte */
+}
+.back-banner {
+  position: absolute;
+  background-color: #D8D6B0;
+  padding: 17vh 0;
+  left: 0;
+  top: 11rem;
+  z-index: -1;
+  right: 0;
+}
+img .product {
+  width: 50%;
+  height: 50%;
+}
+.custom-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background-color: white; /* Couleur blanche pour la moitié droite */
+  z-index: -1;
+}
+
+.custom-hero-content {
+  padding: 50px; /* Ajustez selon vos besoins */
+}
+
+.custom-hero img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto; /* Centrer l'image */
+}
+.txt-center {
+  color: #DB8017;
+  padding-top: 20%;
+  text-align: center;
+  font-family: Helvetica;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+blockquote {
+  color: #618716;
+text-align: center;
+font-family: Holmes207;
+font-size: 40px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+svg .img-banner {
+  margin: 0 0 0 -15%;
+}
+.info .bg-white .p-4 {
+  background-color: grey;
+}
+.img-prod {
+  /* Fixez la dimension souhaitée pour l'élément parent img-prod */
+  width: 200px;
+  height: 150px;
+  /* ou utilisez des pourcentages pour une dimension relative par rapport à son conteneur */
+  /* width: 100%;
+     height: auto; */
+}
+
+.img-prod .img-fluid {
+  /* Pour s'assurer que l'image à l'intérieur de .img-prod occupe tout l'espace disponible */
+  width: 100%;
+  height: 100%;
+  /* Pour que l'image conserve son ratio d'aspect (ne soit pas déformée) */
+  object-fit: cover;
+}
