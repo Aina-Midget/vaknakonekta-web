@@ -49,12 +49,18 @@ html {
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block; }
 
+@font-face {
+  font-family: Holmes207;
+  src: url(/fonts/Holmes207.ttf);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: 'Cantarell', sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
+  font-style: normal;
+  line-height: normal;
   color: #212529;
   text-align: left;
   background-color: #fff; }
@@ -202,7 +208,7 @@ select,
 optgroup,
 textarea {
   margin: 0;
-  font-family: inherit;
+  font-family: Cantarell;
   font-size: inherit;
   line-height: inherit; }
 
@@ -7996,9 +8002,11 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-
+span .media-body {
+  background-color: red;
+}
 body {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: 'Cantarell', sans-serif;
   background: #fff;
   font-size: 15px;
   line-height: 1.8;
@@ -8047,7 +8055,9 @@ h1, h2, h3, h4, h5,
 .ftco-navbar-light {
   background: transparent !important;
   z-index: 3;
-  padding: 0; }
+  padding: 0;
+  box-shadow: 1px 5px 25px -10px rgba(0,0,0,0.2);
+}
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
       background: #000000 !important;
@@ -8068,7 +8078,7 @@ h1, h2, h3, h4, h5,
     .ftco-navbar-light .navbar-nav {
       padding-bottom: 10px; } }
   .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
-    font-size: 11px;
+    font-size: 15px;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
     padding-left: 20px;
@@ -8076,7 +8086,7 @@ h1, h2, h3, h4, h5,
     font-weight: 400;
     color: #000000;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     opacity: 1 !important; }
     .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
       color: #000000; }
@@ -9777,7 +9787,9 @@ textarea.form-control {
     margin-right: 5px; }
     .block-21 .text .meta > div a {
       color: gray; }
-
+.img-escape {
+  background-color: #002752;
+}
 .tagcloud a {
   text-transform: uppercase;
   display: inline-block;
@@ -10042,7 +10054,7 @@ line-height: normal;
 .back-banner {
   position: absolute;
   background-color: #D8D6B0;
-  padding: 17vh 0;
+  padding: 10rem 0;
   left: 0;
   top: 11rem;
   z-index: -1;
